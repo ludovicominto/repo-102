@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: docker:19:03:12
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run: echo "Hello, World!"
