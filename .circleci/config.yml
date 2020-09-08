@@ -7,16 +7,18 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t ludovicominto/docker-react -f Dockerfile.dev .
+      - run: docker build -t app -f Dockerfile.dev .
   test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: docker:19.03.12
     steps:
       - checkout
-      - run: echo "Hello, World!"
+      - setup_remote_docker
+      - run: docker build -t app -f Dockerfile.dev .
+      - run: docker run -e CI=true app npm run test
   deploy:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: docker:19.03.12
     steps:
       - checkout
       - run: echo "Hello, World!"
