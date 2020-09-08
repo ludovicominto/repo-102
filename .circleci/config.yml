@@ -1,8 +1,9 @@
 version: 2
 jobs:
   build:
+    working_directory: /app
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: docker:19:03:12
     steps:
       - checkout
       - run: echo "Hello, World!"
