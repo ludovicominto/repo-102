@@ -27,9 +27,6 @@ workflows:
       - test:
           requires:
             - build 
-      - testb:
-          requires:
-            - build 
       - deploy:
           requires:
             - test
