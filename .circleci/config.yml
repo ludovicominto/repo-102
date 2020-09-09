@@ -8,21 +8,29 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: mkdir -p workspace
-      - run: docker build -t "${CIRCLE_WORKFLOW_ID}-app" -f Dockerfile.dev .
+      - run: docker build -t ${CIRCLE_WORKFLOW_ID}-app -f Dockerfile.dev .
       - run: docker save ${CIRCLE_WORKFLOW_ID}-app | gzip > workspace/${CIRCLE_WORKFLOW_ID}-app.tar.gz
+      - run: echo ${CIRCLE_WORKFLOW_ID}-app
+      - run: echo workspace/${CIRCLE_WORKFLOW_ID}-app.tar.gz
+      - run: ls
+      - run: ls workspace
       # - run: docker save ${CIRCLE_WORKFLOW_ID}-app > workspace/${CIRCLE_WORKFLOW_ID}-app.tar
       - persist_to_workspace:
           root: workspace
           paths:
             - ${CIRCLE_WORKFLOW_ID}-app.tar.gz
   test:
+    working_directory: /home/app
     docker:
       - image: docker:19.03.12
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t app -f Dockerfile.dev .
-      - run: docker run -e CI=true app npm run test
+      - attach_workspace:
+          at: workspace
+      - run: ls -la workspace 
+      # - run: docker build -t app -f Dockerfile.dev .
+      # - run: docker run -e CI=true app npm run test
   deploy:
     docker:
       - image: docker:19.03.12
