@@ -8,6 +8,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker build -t app -f Dockerfile.dev .
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+      - run: mkdir -p workspace
+      - run: touch workspace/foo.txt
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - foo.txt
   test:
     docker:
       - image: docker:19.03.12
