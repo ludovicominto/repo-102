@@ -24,9 +24,10 @@ jobs:
       - setup_remote_docker
       - attach_workspace:
           at: workspace
-      - run: ls -la workspace 
+      - run: ls -la workspace
+      - run: docker load < workspace/${CIRCLE_WORKFLOW_ID}-app.tar.gz
       # - run: docker build -t app -f Dockerfile.dev .
-      # - run: docker run -e CI=true app npm run test
+      - run: docker run -e CI=true ${CIRCLE_WORKFLOW_ID}-app npm run test
   deploy:
     docker:
       - image: docker:19.03.12
