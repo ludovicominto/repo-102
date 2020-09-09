@@ -19,7 +19,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - ${CIRCLE_WORKFLOW_ID}-app.tar.gz
+            - .
   test:
     working_directory: /home/app
     docker:
