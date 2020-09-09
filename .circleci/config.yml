@@ -14,6 +14,7 @@ jobs:
       - run: echo workspace/${CIRCLE_WORKFLOW_ID}-app.tar.gz
       - run: ls
       - run: ls workspace
+      - run: ls /home/app/workspace
       # - run: docker save ${CIRCLE_WORKFLOW_ID}-app > workspace/${CIRCLE_WORKFLOW_ID}-app.tar
       - persist_to_workspace:
           root: workspace
