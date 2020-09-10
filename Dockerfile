@@ -2,14 +2,12 @@ FROM node:alpine as builder
 WORKDIR '/app'
 COPY package*.json ./
 RUN npm install
-RUN echo "Hello"
-RUN ls
-RUN pwd
-RUN rm -rf build
-COPY ./ ./
-RUN rm -rf build
-RUN ls
-RUN pwd
+RUN mkdir build
+RUN ls /app/public
+RUN ls /app/build
+RUN cp /app/public/favicon.ico /app/build/favicon.ico
+RUN ls /app/public
+RUN ls /app/build
 RUN npm run build
 
 FROM nginx
