@@ -2,6 +2,10 @@ FROM node:alpine as builder
 WORKDIR '/app'
 COPY package*.json ./
 RUN npm install
+RUN echo "Hello"
+RUN ls
+RUN pwd
+RUN rm -rf build
 COPY ./ ./
 RUN rm -rf build
 RUN ls
