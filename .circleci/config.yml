@@ -33,16 +33,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker build -t ${CIRCLE_WORKFLOW_ID}-app-prod .
-      # - run: docker save ${CIRCLE_WORKFLOW_ID}-app > workspace/${CIRCLE_WORKFLOW_ID}-app.tar
 
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build
+      # - build
       # - test:
       #     requires:
       #       - build 
-      - deploy:
-          requires:
-            - build
+      - deploy
