@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t app-prod -f Dockerfile .
+      - run: docker build .
 
 workflows:
   version: 2
